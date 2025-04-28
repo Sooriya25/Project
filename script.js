@@ -1,43 +1,69 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     console.log("DOM fully loaded and parsed!");
 
     // Initialize values
     let moistureLevel = Math.floor(Math.random() * 101);
-    let points = 100;
+    let storedCoins = localStorage.getItem("aquaCoins");
+    let aquaCoins = storedCoins ? parseInt(storedCoins) : 100;
+    localStorage.setItem("aquaCoins", aquaCoins);
 
-    // Get the elements by their IDs
+    // Get elements by their IDs
     const moistureLevelElement = document.getElementById("moisture-level");
     const rewardPointsElement = document.getElementById("reward-points");
     const pumpStatusElement = document.getElementById("pump-status");
+    rewardPointsElement.textContent = aquaCoins;
 
-    // Ensure elements are found
-    if (moistureLevelElement  && pumpStatusElement&& pumpStatusElement) {
-        moistureLevelElement.textContent = moistureLevel;  // Set moisture level
-        rewardPointsElement.textContent = points;  // Set reward points
+    if (moistureLevelElement && rewardPointsElement) {
+        moistureLevelElement.textContent = moistureLevel;
+        rewardPointsElement.textContent = aquaCoins;
     } else {
         console.error("Some elements are missing in the HTML!");
     }
 
-    // Simulate weather data
-    let temp = Math.floor(Math.random() * 10) + 25;
-    let humidity = Math.floor(Math.random() * 41) + 30;
-    let rainfall = Math.floor(Math.random() * 101);
-    let wind = Math.floor(Math.random() * 21) + 5;
+    // Fetch data from API
+    const apiUrl = 'https://api.openweathermap.org/data/2.5/weather?lat=11.01467&lon=78.79309&appid=c3e05129d976e9d894fc23a37b949193&units=metric';
 
-    // Display weather data
-    document.getElementById("temp").textContent = temp;
-    document.getElementById("humidity").textContent = humidity;
-    document.getElementById("rain").textContent = rainfall;
-    document.getElementById("wind").textContent = wind;
+     fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            const temp = Math.round(data.main.temp);
+            const weatherDescription = data.weather[0].description;
+            const humidity = data.main.humidity;
+            const wind = data.wind.speed;
+            const rainfall = data.rain ? data.rain["1h"] : 0;
+        
+            document.getElementById("temp").textContent = temp;
+            document.getElementById("humidity").textContent = humidity;
+            document.getElementById("rain").textContent = rainfall/10;
+            document.getElementById("wind").textContent = wind;
+            document.getElementById("weather-description").textContent = weatherDescription;
+            console.log(weatherDescription);
+        })
+        .catch(error => {
+            console.error("Error fetching weather data:", error);
+        });
 
-    // Control Pump Status
-    document.getElementById("pump-on").addEventListener("click", function() {
-        pumpStatusElement.textContent = "Pump Status: ON";
-    });
+            document.getElementById("pump-on").addEventListener("click", function () {
+                pumpStatusElement.textContent = "Pump Status: ON";
+                console.log("pump-on button clicked");
+                if (moistureLevel >= 10 && moistureLevel <= 30) {
+                    aquaCoins += 10;
+                    console.log(aquaCoins);
+                    rewardPointsElement.textContent = aquaCoins;
+                    localStorage.setItem("aquaCoins", aquaCoins);
+                    alert("🎉 Congratulations!! You won 10 Aquacoins 🎉");
+                }
+            });
 
-    document.getElementById("pump-off").addEventListener("click", function() {
-        pumpStatusElement.textContent = "Pump Status: OFF";
-    });
-
-
-});
+            document.getElementById("pump-off").addEventListener("click", function () {
+                pumpStatusElement.textContent = "Pump Status: OFF";
+                if (moistureLevel >= 80 && moistureLevel <= 100) {
+                    aquaCoins += 10;
+                    console.log(aquaCoins);
+                    rewardPointsElement.textContent = aquaCoins;
+                    localStorage.setItem("aquaCoins", aquaCoins);
+                    alert("🎉 Congratulations!! You won 10 Aquacoins 🎉");
+                }
+            });
+        
+}); 

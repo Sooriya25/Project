@@ -4,18 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redeem AquaPoints</title>
-    <link rel="stylesheet" href="styles.css">
-    
+    <link rel="stylesheet" href="styles.css">   
 </head>
+
+<header class="redeem-header">
+    <h1 >🛒 Redeem Aquacoins</h1>
+    <h3 >Aquacoins🪙 : <span id="reward-points">100</span></h3>
+    <p>Exchange your points for useful agricultural products.</p>
+    <a href="index.html" class="back-button">⬅ Back to Dashboard</a>
+</header>
+
 <body>
-
-    <header>
-        <h1 id="redeem-title">🛒 Redeem Aquacoins</h1>
-        <h3>Aquacoins💵: 100</h3>
-        <p>Exchange your points for useful agricultural products.</p>
-        <a href="index.html" class="back-button">⬅ Back to Dashboard</a>
-    </header>
-
     <main>
         <div class="redeem-container">
             <div class="product">
@@ -91,6 +90,16 @@
                 <button class="buy-btn" data-cost="200" data-item="Plant-food">Redeem</button>
             </div>
         </div>
+        <div class="popup-overlay">
+        </div>
+            <div class="popup-Box">
+                <div class="popup-box">
+                    <p>🎉 Congratulation!! you redeemed <span id="product-name">pvc pipes</span> successfully using Aquacoins🎉</p>
+                    <img src="./Imgs/pea_seads.jpg" alt="product image" class="image">
+                    <button id="popup-cancel-btn">OK</button>
+                </div>
+            </div>
+        
     </main>
     <script src="redeem.js" defer></script>
 </body>
