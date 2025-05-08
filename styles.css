@@ -1,5 +1,4 @@
 
-
 body {
     font-family: Arial, Helvetica, sans-serif sans-serif;
     background-color: #9ad0f7;
@@ -35,7 +34,7 @@ h1, h2 ,h3{
 
 p {
     font-size: 14px;
-    padding: 10px;
+    padding: 5px;
 }
 
 button {
@@ -87,9 +86,12 @@ button {
     grid-template-columns: repeat(2,1fr);
     justify-content: center;
     align-content: center;
-    padding: 5px;
-    margin: 5px;
-    margin-left: 50px;
+    align-items: center;
+    text-align: center;
+    place-items: center;
+    gap: 20px;
+    padding: 20px;
+    margin: 0px;
     margin-top: 110px;
 }
 
@@ -97,16 +99,20 @@ button {
     background-color: white;
     border: 1px solid hsl(0,0%,80%);
     border-radius: 10px;
-    margin: 10px;
     padding: 5px;
     text-align: center;
-    max-width: 500px;
     height: 210px;
-    display: inline-block;
+    min-width: 550px;
     box-shadow: 2px 2px 5px hsla(0,0%,0%,0.1);
     box-sizing: border-box;
 }
- 
+.weather-data P,.weather-data h2, .moisture p{
+    padding: 5px;
+    margin: 3px;
+}
+.moisture h4{
+    margin-top: 15px;
+}
 
 .redeem-container {
     display: flex;
@@ -208,6 +214,7 @@ button {
 .popup-Box{
     display: none;
     transition: all 0.3s ease;
+    padding: 10px;
 }
 .popup-box{
     background-color: rgb(250, 248, 248);
@@ -235,6 +242,7 @@ button {
     border-radius: 15px;
 }
 .popup-box p {
+    padding: 10px;
     font-size: 1.2rem;
     font-weight: bold;
     font-family:  Times, 'Times New Roman', serif;
@@ -251,4 +259,87 @@ button {
 .popup-box button:hover{
     background-color:   hsl(200, 100%, 36%);
 }
-
+@media (max-width: 600px){
+    #header-title{
+        font-size: 14px;
+    }
+    #header-description{
+        font-size: 10px;
+    }
+    .container{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        text-align: center;
+        place-items: center;
+        gap: 20px;
+        padding: 20px;
+        margin: 0px;
+        margin-top: 110px;
+    }
+    .container h3{
+        font-size: 12px;
+    }
+    .container p{
+        font-size: 10px;
+    }
+    
+    .pump-control, .weather-data,.moisture, .rewards {
+        border-radius: 10px;
+        padding: 5px;
+        text-align: center;
+        height: 190px;
+        min-width: 190px;
+        box-shadow: 2px 2px 5px hsla(0,0%,0%,0.1);
+        box-sizing: border-box;
+    }
+    .weather-data P,.weather-data h2, .moisture p{
+        padding: 5px;
+        margin: 3px;
+    }
+    .moisture h4{
+        margin-top: 5px;
+    }
+    .sensor-box{
+        font-size: 12px;
+    }
+    .weather-grid{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        gap: 2px;
+    }
+    .weather-grid h4{
+        font-size: 10px;
+    }
+    .product {
+        background-color: white;
+        border: 1px solid hsl(0,0%,80%);
+        border-radius: 10px;
+        margin: 10px;
+        padding: 10px;
+        text-align: center;
+        max-width: 120px;
+        display: inline-block;
+        box-shadow: 2px 2px 5px hsla(0,0%,0%,0.1);
+    }
+    .product h3{
+        font-size: 12px;
+        padding: none;
+        margin: none;
+    }
+    .product p{
+        font-size: 8px;
+        padding: none;
+        margin: none;
+    }
+    .product button{
+        font-size: 8px;
+        padding: 5px 7px;
+    }
+    .header{
+        height: auto;
+    }
+    
+}
